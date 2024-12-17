@@ -3,6 +3,7 @@ FROM oven/bun
 WORKDIR /usr/src/app
 
 COPY package.json ./
+RUN apt update && apt install python3 python3-pip make g++ -y
 RUN bun install
 COPY . .
 
