@@ -1,7 +1,7 @@
 import { addr } from "./util";
 
 export const BURN_ADDRESS = "0x0000000000000000000000000000000000000000";
-export const PARALLEL_COUNT = 50;
+export const PARALLEL_COUNT = 100;
 
 // TODO: if/when new artists are regularly added, just pull from api
 export const ARTISTS = [
