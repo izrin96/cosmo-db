@@ -31,7 +31,7 @@ processor.run(db, async (ctx) => {
       const collectionBatch = new Map<string, Collection>();
       const objektBatch = new Map<string, Objekt>();
 
-      const metadataBatch = await Promise.allSettled(
+      const metadataBatch = await Promise.all(
         chunk.map((e) => fetchMetadataFromCosmo(e.tokenId))
       );
 
@@ -39,13 +39,9 @@ processor.run(db, async (ctx) => {
       for (let j = 0; j < metadataBatch.length; j++) {
         const request = metadataBatch[j];
         const currentTransfer = chunk[j];
-        if (
-          request.status === "rejected" ||
-          !request.value ||
-          !request.value.objekt
-        ) {
+        if (!request?.objekt) {
           ctx.log.error(
-            `Unable to fetch metadata for token ${currentTransfer.tokenId}`
+            `Unable to fetch metadata for token ${currentTransfer.tokenId}. Reason: ${(request as any)?.error?.message}`
           );
           continue;
         }
@@ -53,7 +49,7 @@ processor.run(db, async (ctx) => {
         // handle collection
         const collection = await handleCollection(
           ctx,
-          request.value,
+          request,
           collectionBatch,
           currentTransfer
         );
@@ -62,7 +58,7 @@ processor.run(db, async (ctx) => {
         // handle objekt
         const objekt = await handleObjekt(
           ctx,
-          request.value,
+          request,
           objektBatch,
           currentTransfer
         );
