@@ -41,7 +41,9 @@ processor.run(db, async (ctx) => {
         const currentTransfer = chunk[j];
         if (!request?.objekt) {
           ctx.log.error(
-            `Unable to fetch metadata for token ${currentTransfer.tokenId}. Reason: ${(request as any)?.error?.message}`
+            `Unable to fetch metadata for token ${
+              currentTransfer.tokenId
+            }. Reason: ${(request as any)?.error?.message}`
           );
           continue;
         }
@@ -221,6 +223,19 @@ async function handleCollection(
   collection.backgroundColor = metadata.objekt.backgroundColor;
   collection.textColor = metadata.objekt.textColor;
   collection.accentColor = metadata.objekt.accentColor;
+
+  // temporary fix accent color for below collection
+  if (
+    [
+      "divine01-seoyeon-117z",
+      "divine01-seoyeon-118z",
+      "divine01-seoyeon-119z",
+      "divine01-seoyeon-120z",
+    ].includes(slug)
+  ) {
+    collection.backgroundColor = "#B400FF";
+    collection.accentColor = "#B400FF";
+  }
 
   return collection;
 }

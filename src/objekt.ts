@@ -35,12 +35,12 @@ export async function fetchMetadataFromCosmo(tokenId: string) {
     `https://api.cosmo.fans/objekt/v1/token/${tokenId}`,
     {
       onResponse({ response, options }) {
-        if (response.ok || response.status === 404) {
+        if (response.status === 404) {
           options.ignoreResponseError = true;
         }
       },
-      retry: 2,
-      retryDelay: 500, // 500ms backoff
+      retry: 10,
+      retryDelay: 3500, // 500ms backoff
     }
   );
 }
