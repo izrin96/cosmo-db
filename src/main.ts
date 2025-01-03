@@ -207,35 +207,35 @@ async function handleCollection(
     });
   }
 
-  // set and/or update metadata
-  collection.season = metadata.objekt.season;
-  collection.member = metadata.objekt.member;
-  collection.artist = metadata.objekt.artists[0];
-  collection.collectionNo = metadata.objekt.collectionNo;
-  collection.class = metadata.objekt.class;
-  collection.comoAmount = metadata.objekt.comoAmount;
-  collection.onOffline = metadata.objekt.collectionNo.includes("Z")
-    ? "online"
-    : "offline";
-  collection.thumbnailImage = metadata.objekt.thumbnailImage;
-  collection.frontImage = metadata.objekt.frontImage;
-  collection.backImage = metadata.objekt.backImage;
-  collection.backgroundColor = metadata.objekt.backgroundColor;
-  collection.textColor = metadata.objekt.textColor;
-  collection.accentColor = metadata.objekt.accentColor;
+  // // set and/or update metadata
+  // collection.season = metadata.objekt.season;
+  // collection.member = metadata.objekt.member;
+  // collection.artist = metadata.objekt.artists[0];
+  // collection.collectionNo = metadata.objekt.collectionNo;
+  // collection.class = metadata.objekt.class;
+  // collection.comoAmount = metadata.objekt.comoAmount;
+  // collection.onOffline = metadata.objekt.collectionNo.includes("Z")
+  //   ? "online"
+  //   : "offline";
+  // collection.thumbnailImage = metadata.objekt.thumbnailImage;
+  // collection.frontImage = metadata.objekt.frontImage;
+  // collection.backImage = metadata.objekt.backImage;
+  // collection.backgroundColor = metadata.objekt.backgroundColor;
+  // collection.textColor = metadata.objekt.textColor;
+  // collection.accentColor = metadata.objekt.accentColor;
 
-  // temporary fix accent color for below collection
-  if (
-    [
-      "divine01-seoyeon-117z",
-      "divine01-seoyeon-118z",
-      "divine01-seoyeon-119z",
-      "divine01-seoyeon-120z",
-    ].includes(slug)
-  ) {
-    collection.backgroundColor = "#B400FF";
-    collection.accentColor = "#B400FF";
-  }
+  // // temporary fix accent color for below collection
+  // if (
+  //   [
+  //     "divine01-seoyeon-117z",
+  //     "divine01-seoyeon-118z",
+  //     "divine01-seoyeon-119z",
+  //     "divine01-seoyeon-120z",
+  //   ].includes(slug)
+  // ) {
+  //   collection.backgroundColor = "#B400FF";
+  //   collection.accentColor = "#B400FF";
+  // }
 
   return collection;
 }
