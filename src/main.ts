@@ -6,8 +6,12 @@ import { addr, chunk } from "./util";
 import { TypeormDatabase, Store } from "@subsquid/typeorm-store";
 import { randomUUID } from "crypto";
 import { env } from "./env/processor";
+import * as Ably from "ably";
 
 const db = new TypeormDatabase({ supportHotBlocks: true });
+
+const ablyClient = new Ably.Rest(env.ABLY_API_KEY);
+const channel = ablyClient.channels.get("transfers");
 
 processor.run(db, async (ctx) => {
   const { transfers, transferability } = parseBlocks(ctx.blocks);
@@ -76,6 +80,24 @@ processor.run(db, async (ctx) => {
       // upsert transfers
       if (transferBatch.length > 0) {
         await ctx.store.upsert(transferBatch);
+      }
+
+      // send to ably for realtime update
+      for (let j = 0; j < transferBatch.length; j++) {
+        const transfer = transferBatch[j];
+        const payload = {
+          ...transfer.collection,
+          id: transfer.id,
+          from: transfer.from,
+          to: transfer.to,
+          timestamp: transfer.timestamp,
+          tokenId: transfer.tokenId,
+          serial: transfer.objekt.serial,
+          receivedAt: transfer.objekt.receivedAt,
+          mintedAt: transfer.objekt.mintedAt,
+          transferable: transfer.objekt.transferable,
+        };
+        channel.publish("up", payload);
       }
     });
 

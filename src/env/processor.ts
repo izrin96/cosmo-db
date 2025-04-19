@@ -10,6 +10,7 @@ const envSchema = z
     ENABLE_OBJEKTS: z.preprocess((x) => x === "true", z.coerce.boolean()),
     ENABLE_GRAVITY: z.preprocess((x) => x === "true", z.coerce.boolean()),
     COSMO_PARALLEL_COUNT: z.coerce.number().positive().default(500),
+    ABLY_API_KEY: z.string().min(1),
   })
   .merge(baseEnvSchema);
 
