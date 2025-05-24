@@ -5,7 +5,7 @@ import { BlockData } from "@subsquid/evm-processor";
 import * as ABI_OBJEKT from "./abi/objekt";
 import * as ABI_COMO from "./abi/como";
 import { Addresses } from "./constants";
-import { randomUUID } from "crypto";
+import { v7 as randomUUID } from "uuid";
 
 const transferability = ABI_OBJEKT.functions.batchUpdateObjektTransferability;
 
