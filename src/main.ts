@@ -9,7 +9,6 @@ import { MetadataV1, fetchMetadata } from "./cosmo";
 import { Collection, ComoBalance, Objekt, Transfer, Vote } from "./model";
 import { addr, chunk } from "./util";
 import { TypeormDatabase, Store } from "@subsquid/typeorm-store";
-import { randomUUID } from "crypto";
 import { env } from "./env/processor";
 import { Addresses } from "./constants";
 
@@ -178,7 +177,6 @@ async function handleCollection(
   // create
   if (!collection) {
     collection = new Collection({
-      id: randomUUID(),
       contract: addr(metadata.objekt.tokenAddress),
       createdAt: new Date(transfer.timestamp),
       collectionId: metadata.objekt.collectionId,
@@ -326,7 +324,6 @@ async function getBalance(
   // create
   if (!balance) {
     balance = new ComoBalance({
-      id: randomUUID(),
       tokenId: tokenId,
       owner: owner,
       amount: BigInt(0),
@@ -341,7 +338,6 @@ async function getBalance(
  */
 async function handleVoteCreation(event: VoteEvent) {
   return new Vote({
-    id: randomUUID(),
     from: event.from,
     createdAt: new Date(event.timestamp),
     contract: event.contract,

@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryColumn, Index, OneToMany } from "typeorm";
+import { Entity, Column, PrimaryColumn, Index, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Transfer } from "./transfer.model";
 import { Objekt } from "./objekt.model";
 
@@ -9,10 +9,7 @@ export class Collection {
   }
 
   // for some reason subsquid tries to cast this to ::text, so uuid won't work
-  @PrimaryColumn({
-    type: "varchar",
-    length: 36,
-  })
+  @PrimaryGeneratedColumn("uuid")
   id!: string;
 
   @Index()

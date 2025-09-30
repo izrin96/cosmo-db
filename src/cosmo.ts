@@ -1,14 +1,12 @@
 import { ofetch } from "ofetch";
 
 export async function fetchMetadata(tokenId: string) {
-  return await fetchMetadataV1(tokenId);
-  // try {
-  //   return await fetchMetadataV1(tokenId);
-  // } catch (error) {
-  //   console.log(`[fetchMetadata] Error fetching v1 metadata: ${error}`);
-  //   const v3 = await fetchMetadataV3(tokenId);
-  //   return normalizeV3(v3, tokenId);
-  // }
+  try {
+    return await fetchMetadataV1(tokenId);
+  } catch (error) {
+    console.log(`[fetchMetadata] Error fetching v1 metadata: ${error}`);
+    return emptyMetadata(tokenId);
+  }
 }
 
 export type MetadataV1 = {
@@ -108,6 +106,35 @@ export function normalizeV3(metadata: MetadataV3, tokenId: string): MetadataV1 {
       backImage: "",
       accentColor: "",
       textColor: "#000000",
+      objektNo: 0,
+      tokenAddress: "",
+      transferable: false,
+    },
+  };
+}
+
+export function emptyMetadata(tokenId: string): MetadataV1 {
+  return {
+    name: "empty-collection",
+    description: "",
+    image: "",
+    background_color: "",
+    objekt: {
+      collectionId: "empty-collection",
+      season: "",
+      member: "",
+      collectionNo: "",
+      class: "",
+      artists: [""],
+      thumbnailImage: "",
+      frontImage: "",
+      backgroundColor: "",
+      comoAmount: 0,
+      tokenId: tokenId,
+      // not possible to get from v3
+      backImage: "",
+      accentColor: "",
+      textColor: "",
       objektNo: 0,
       tokenAddress: "",
       transferable: false,

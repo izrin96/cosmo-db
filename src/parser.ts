@@ -6,7 +6,6 @@ import * as ABI_OBJEKT from "./abi/objekt";
 import * as ABI_COMO from "./abi/como";
 import * as ABI_GRAVITY from "./abi/gravity";
 import { Addresses } from "./constants";
-import { randomUUID } from "crypto";
 
 const transferability = ABI_OBJEKT.functions.batchUpdateObjektTransferability;
 
@@ -24,7 +23,6 @@ export function parseBlocks(blocks: BlockData<Fields>[]) {
       .filter((e) => e !== undefined)
       .map((event) => {
         return new Transfer({
-          id: randomUUID(),
           from: event.from,
           to: event.to,
           timestamp: new Date(event.timestamp),

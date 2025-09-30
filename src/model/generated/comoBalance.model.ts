@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryColumn, Index } from "typeorm";
+import { Entity, Column, PrimaryColumn, Index, PrimaryGeneratedColumn } from "typeorm";
 import * as marshal from "./marshal";
 
 @Entity()
@@ -8,10 +8,7 @@ export class ComoBalance {
   }
 
   // for some reason subsquid tries to cast this to ::text, so uuid won't work
-  @PrimaryColumn({
-    type: "varchar",
-    length: 36,
-  })
+  @PrimaryGeneratedColumn("uuid")
   id!: string;
 
   @Index()
