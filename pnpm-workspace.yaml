@@ -1,0 +1,2 @@
+patchedDependencies:
+  '@subsquid/typeorm-store': patches/@subsquid__typeorm-store.patch
