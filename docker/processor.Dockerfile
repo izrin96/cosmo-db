@@ -6,12 +6,13 @@ RUN npm install -g pnpm
 FROM node-with-gyp AS builder
 WORKDIR /squid
 ADD package.json .
-ADD pnpm-lock.yaml .
+ADD patches patches
+ADD pnpm-lock.yaml pnpm-workspace.yaml .
 # remove if needed
 ADD db db
 # remove if needed
 ADD schema.graphql .
-RUN pnpm install
+RUN pnpm install --frozen-lockfile
 ADD tsconfig.json .
 ADD src src
 RUN pnpm run build
@@ -19,8 +20,9 @@ RUN pnpm run build
 FROM node-with-gyp AS deps
 WORKDIR /squid
 ADD package.json .
-ADD pnpm-lock.yaml .
-RUN pnpm install --prod
+ADD patches patches
+ADD pnpm-lock.yaml pnpm-workspace.yaml .
+RUN pnpm install --frozen-lockfile --prod
 
 FROM node AS squid
 WORKDIR /squid
