@@ -9,7 +9,7 @@ import { MetadataV1, fetchMetadata } from "./cosmo";
 import { Collection, ComoBalance, Objekt, Transfer, Vote } from "./model";
 import { addr, chunk } from "./util";
 import { TypeormDatabase, Store } from "@subsquid/typeorm-store";
-import { randomUUID } from "crypto";
+import { v7 as randomUUID } from "uuid";
 import { env } from "./env/processor";
 import { Addresses } from "./constants";
 
