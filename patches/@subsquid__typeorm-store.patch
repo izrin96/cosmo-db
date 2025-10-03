@@ -11,16 +11,3 @@ index fc41923ff9ac8f67ded1dd1b2808d293fe93988d..3276b4d25ef977e238177cf019ae59c3
          // Here we transform the row object returned by the driver to its
          // JSON variant in such a way, that `driver.query('UPDATE entity SET field = $1', [json.field])`
          // would be always correctly handled.
-diff --git a/src/hot.ts b/src/hot.ts
-index 33030331be8541fde733f3289dc0d83106dd824a..0e6759c3e95eeeb6757ec6bf0e420dc07925837e 100644
---- a/src/hot.ts
-+++ b/src/hot.ts
-@@ -106,7 +106,7 @@ export class ChangeTracker {
- 
-     private async fetchEntities(meta: EntityMetadata, ids: string[]): Promise<Entity[]> {
-         let entities = await this.em.query(
--            `SELECT * FROM ${this.escape(meta.tableName)} WHERE id = ANY($1::text[])`,
-+            `SELECT * FROM ${this.escape(meta.tableName)} WHERE id = ANY($1[])`,
-             [ids]
-         )
- 
