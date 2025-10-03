@@ -1,5 +1,5 @@
 diff --git a/lib/hot.js b/lib/hot.js
-index fc41923ff9ac8f67ded1dd1b2808d293fe93988d..3276b4d25ef977e238177cf019ae59c319a3d878 100644
+index fc41923ff9ac8f67ded1dd1b2808d293fe93988d..dd7d85401efd32a5d7101f8e739382c57de91e9c 100644
 --- a/lib/hot.js
 +++ b/lib/hot.js
 @@ -56,7 +56,7 @@ class ChangeTracker {
@@ -7,7 +7,7 @@ index fc41923ff9ac8f67ded1dd1b2808d293fe93988d..3276b4d25ef977e238177cf019ae59c3
      }
      async fetchEntities(meta, ids) {
 -        let entities = await this.em.query(`SELECT * FROM ${this.escape(meta.tableName)} WHERE id = ANY($1::text[])`, [ids]);
-+        let entities = await this.em.query(`SELECT * FROM ${this.escape(meta.tableName)} WHERE id = ANY($1[])`, [ids]);
++        let entities = await this.em.query(`SELECT * FROM ${this.escape(meta.tableName)} WHERE id = ANY($1)`, [ids]);
          // Here we transform the row object returned by the driver to its
          // JSON variant in such a way, that `driver.query('UPDATE entity SET field = $1', [json.field])`
          // would be always correctly handled.
