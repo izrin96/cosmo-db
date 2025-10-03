@@ -6,7 +6,7 @@ settings:
 
 patchedDependencies:
   '@subsquid/typeorm-store':
-    hash: 96ddc89642272f93238685192e3d0bc184520ae710873da0a834bd4581bbd11a
+    hash: b6931ac5a0e5e7faedd99362b8df0f7470a3eb1ee629868fff3edd22cc2287a1
     path: patches/@subsquid__typeorm-store.patch
 
 importers:
@@ -30,7 +30,7 @@ importers:
         version: 1.3.0(typeorm@0.3.27(ioredis@5.4.2)(pg@8.16.3)(reflect-metadata@0.2.2)(ts-node@10.9.2(@types/node@22.18.8)(typescript@5.9.3)))
       '@subsquid/typeorm-store':
         specifier: ^1.5.1
-        version: 1.5.1(patch_hash=96ddc89642272f93238685192e3d0bc184520ae710873da0a834bd4581bbd11a)(@subsquid/big-decimal@1.0.0)(typeorm@0.3.27(ioredis@5.4.2)(pg@8.16.3)(reflect-metadata@0.2.2)(ts-node@10.9.2(@types/node@22.18.8)(typescript@5.9.3)))
+        version: 1.5.1(patch_hash=b6931ac5a0e5e7faedd99362b8df0f7470a3eb1ee629868fff3edd22cc2287a1)(@subsquid/big-decimal@1.0.0)(typeorm@0.3.27(ioredis@5.4.2)(pg@8.16.3)(reflect-metadata@0.2.2)(ts-node@10.9.2(@types/node@22.18.8)(typescript@5.9.3)))
       '@subsquid/util-internal':
         specifier: ^3.2.0
         version: 3.2.0
@@ -2392,7 +2392,7 @@ snapshots:
       dotenv: 16.6.1
       typeorm: 0.3.27(ioredis@5.4.2)(pg@8.16.3)(reflect-metadata@0.2.2)(ts-node@10.9.2(@types/node@22.18.8)(typescript@5.9.3))
 
-  '@subsquid/typeorm-store@1.5.1(patch_hash=96ddc89642272f93238685192e3d0bc184520ae710873da0a834bd4581bbd11a)(@subsquid/big-decimal@1.0.0)(typeorm@0.3.27(ioredis@5.4.2)(pg@8.16.3)(reflect-metadata@0.2.2)(ts-node@10.9.2(@types/node@22.18.8)(typescript@5.9.3)))':
+  '@subsquid/typeorm-store@1.5.1(patch_hash=b6931ac5a0e5e7faedd99362b8df0f7470a3eb1ee629868fff3edd22cc2287a1)(@subsquid/big-decimal@1.0.0)(typeorm@0.3.27(ioredis@5.4.2)(pg@8.16.3)(reflect-metadata@0.2.2)(ts-node@10.9.2(@types/node@22.18.8)(typescript@5.9.3)))':
     dependencies:
       '@subsquid/big-decimal': 1.0.0
       '@subsquid/typeorm-config': 4.1.1(typeorm@0.3.27(ioredis@5.4.2)(pg@8.16.3)(reflect-metadata@0.2.2)(ts-node@10.9.2(@types/node@22.18.8)(typescript@5.9.3)))
