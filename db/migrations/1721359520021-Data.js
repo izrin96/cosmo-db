@@ -108,13 +108,13 @@ module.exports = class Data1721359520021 {
       `CREATE INDEX "IDX_b1bff3977e6bfbca8ea3747d50" ON "vote" ("contract", "poll_id", "index") `
     );
     await db.query(
-      `ALTER TABLE "objekt" ADD CONSTRAINT "FK_cc0196669f13f5958a307824a2b" FOREIGN KEY ("collection_id") REFERENCES "collection"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`
+      `ALTER TABLE "objekt" ADD CONSTRAINT "FK_cc0196669f13f5958a307824a2b" FOREIGN KEY ("collection_id") REFERENCES "collection"("id") ON DELETE CASCADE ON UPDATE CASCADE`
     );
     await db.query(
-      `ALTER TABLE "transfer" ADD CONSTRAINT "FK_98d4c0e33193fdd3edfc826c37f" FOREIGN KEY ("objekt_id") REFERENCES "objekt"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`
+      `ALTER TABLE "transfer" ADD CONSTRAINT "FK_98d4c0e33193fdd3edfc826c37f" FOREIGN KEY ("objekt_id") REFERENCES "objekt"("id") ON DELETE CASCADE ON UPDATE CASCADE`
     );
     await db.query(
-      `ALTER TABLE "transfer" ADD CONSTRAINT "FK_15a8d2966ae7e5e9b2ff47104f0" FOREIGN KEY ("collection_id") REFERENCES "collection"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`
+      `ALTER TABLE "transfer" ADD CONSTRAINT "FK_15a8d2966ae7e5e9b2ff47104f0" FOREIGN KEY ("collection_id") REFERENCES "collection"("id") ON DELETE CASCADE ON UPDATE CASCADE`
     );
   }
 
