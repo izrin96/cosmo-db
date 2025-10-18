@@ -21,6 +21,8 @@ processor.run(db, async (ctx) => {
     ctx.blocks
   );
 
+  const transferBatchAll: Transfer[] = [];
+
   if (env.ENABLE_OBJEKTS) {
     if (transfers.length > 0) {
       ctx.log.info(`Processing ${transfers.length} objekt transfers`);
@@ -85,14 +87,9 @@ processor.run(db, async (ctx) => {
       // upsert transfers
       if (transferBatch.length > 0) {
         await ctx.store.upsert(transferBatch);
-
-        // publish redis
-        try {
-          redis.publish("transfers", JSON.stringify(transferBatch));
-        } catch (e) {
-          console.error("Redis publish failed:", e);
-        }
       }
+
+      transferBatchAll.push(...transferBatch);
     });
 
     // process transferability updates separately from transfers
@@ -149,6 +146,13 @@ processor.run(db, async (ctx) => {
         await ctx.store.upsert(Array.from(comoBalanceBatch.values()));
       }
     });
+  }
+
+  // publish redis
+  try {
+    redis.publish("transfers", JSON.stringify(transferBatchAll));
+  } catch (e) {
+    console.error("Redis publish failed:", e);
   }
 });
 
