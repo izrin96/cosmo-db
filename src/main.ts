@@ -87,9 +87,8 @@ processor.run(db, async (ctx) => {
       // upsert transfers
       if (transferBatch.length > 0) {
         await ctx.store.upsert(transferBatch);
+        transferBatchAll.push(...transferBatch);
       }
-
-      transferBatchAll.push(...transferBatch);
     });
 
     // process transferability updates separately from transfers
@@ -150,7 +149,9 @@ processor.run(db, async (ctx) => {
 
   // publish redis
   try {
-    redis.publish("transfers", JSON.stringify(transferBatchAll));
+    if (transferBatchAll.length > 0) {
+      redis.publish("transfers", JSON.stringify(transferBatchAll));
+    }
   } catch (e) {
     console.error("Redis publish failed:", e);
   }
