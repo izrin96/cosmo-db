@@ -12,6 +12,7 @@ import { TypeormDatabase, Store } from "@subsquid/typeorm-store";
 import { v7 as randomUUID } from "uuid";
 import { env } from "./env/processor";
 import { Addresses } from "./constants";
+import { redis } from "./redis";
 
 const db = new TypeormDatabase({ supportHotBlocks: true });
 
@@ -84,6 +85,13 @@ processor.run(db, async (ctx) => {
       // upsert transfers
       if (transferBatch.length > 0) {
         await ctx.store.upsert(transferBatch);
+
+        // publish redis
+        try {
+          redis.publish("transfers", JSON.stringify(transferBatch));
+        } catch (e) {
+          console.error("Redis publish failed:", e);
+        }
       }
     });
 
